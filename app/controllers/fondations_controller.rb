@@ -1,0 +1,2 @@
+class FondationsController < ApplicationController
+end
