@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
   def index
-    @projects = Project.all.order("expiration DESC")
+    @projects = Project.all.order("expiration ASC")
   end
 
   def show
@@ -12,16 +12,17 @@ class ProjectsController < ApplicationController
     @project = Project.new
   end
 
-  def edit
-  end
 
   def create
-    @project = Project.new(post_params)
+    @project = Project.new(project_params)
     if @project.save
-      redirect_to project_path(@project)
+      redirect_to projects_path
     else
       render :new
     end
+  end
+
+  def edit
   end
 
   def update
