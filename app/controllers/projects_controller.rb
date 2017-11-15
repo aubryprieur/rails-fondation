@@ -2,7 +2,11 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
   def index
-    @projects = Project.all.order("expiration ASC")
+    if params[:tag]
+      @projects = Project.tagged_with(params[:tag])
+    else
+      @projects = Project.all.order("expiration ASC")
+    end
   end
 
   def show

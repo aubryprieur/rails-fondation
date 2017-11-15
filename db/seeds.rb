@@ -57,6 +57,7 @@ p Project.create!(
   expiration: "21/02/2018",
   category_id: "8",
   fondation_id: "1083",
+
   )
 p Project.create!(
   title: "En 2017, le prix Frédéric de Carfort récompensera une peinture",

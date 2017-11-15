@@ -1,13 +1,13 @@
 <div class="container">
   <% @projects.each do |project| %>
-  <div class="project-content">
-    <%= link_to project.link, :target => '_blank' do %>
-      <h2><%= project.title %></h2>
-      <p><%= project.description %></p>
-      <p><%= project.link %></p>
-      <p><%= project.expiration %></p>
-      <p><%=raw project.all_tags %></p>
-    <% end %>
-  </div>
+    <div class="project-content">
+        <h2><%= project.title %></h2>
+        <p><%= project.description %></p>
+        <p>Date limité de dépôt des projets: <%= project.expiration.strftime('%x') %></p>
+        <p>Catégorie: <%= project.category.title %></p>
+        <p>Fondation: <%= project.fondation.title %></p>
+        <p>Eligible: <%=raw tag_links(project.all_tags)%></p>
+        <p class="text-right"><%= link_to ">> accéder à l'appel à projet", project.link, :target => '_blank' %></p>
+    </div>
   <% end %>
 </div>
