@@ -1,4 +1,15 @@
 <div class="container">
+    <div class="form-inputs" id="form">
+      <%= simple_form_for @search, method: :get, url: projects_path do |f| %>
+          <div>
+            <%= f.input :category, required: false, label: false, collection: @categories, class: 'form-control' %>
+          </div>
+          <div>
+            <%= f.submit 'GO', class: 'btn btn-primary paddind-categroy ' %>
+          </div>
+      <% end %>
+    </div>
+<div>
   <% @projects.each do |project| %>
     <div class="project-content">
         <h2><%= project.title %></h2>
@@ -11,3 +22,8 @@
     </div>
   <% end %>
 </div>
+</div>
+
+
+
+

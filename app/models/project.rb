@@ -4,6 +4,8 @@ class Project < ApplicationRecord
   has_many :taggings
   has_many :tags, through: :taggings
 
+  scope :category, -> (category) { where category: category }
+
   def all_tags=(names)
   self.tags = names.split(",").map do |name|
       Tag.where(name: name.strip).first_or_create!
@@ -18,8 +20,5 @@ class Project < ApplicationRecord
     Tag.find_by_name!(name).projects
   end
 
-  # def tag_links(tags)
-  #   tags.split(",").map{|tag| link_to tag.strip, tag_path(tag.strip) }.join(", ")
-  # end
 
 end
