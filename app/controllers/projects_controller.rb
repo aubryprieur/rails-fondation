@@ -24,10 +24,10 @@ class ProjectsController < ApplicationController
     session[:search] = params[:search] if params[:search].present?
     request = Project
 
-    return @projects = request.page(params[:page]).paginate(:page => params[:page], :per_page => 2) unless session[:search].present?
+    return @projects = request.page(params[:page]).order("expiration ASC").paginate(:page => params[:page], :per_page => 2) unless session[:search].present?
 
     request = request.where(category: session[:search]['category']) if session[:search]['category'].present?
-    @projects = request.page(params[:page]).paginate(:page => params[:page], :per_page => 2)
+    @projects = request.page(params[:page]).order("expiration ASC").paginate(:page => params[:page], :per_page => 2)
   end
 
 
