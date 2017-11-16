@@ -1,22 +1,34 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
+  # def index
+  #   @search = Search.new(search_params)
+  #   @categories = Category.all
+  #   if params[:category].present?
+  #      @projects = @projects.category(params[:category]).paginate(:page => params[:page], :per_page => 2)
+  #   else
+  #     @projects = Project.where(nil).order("expiration ASC").paginate(:page => params[:page], :per_page => 2)
+  #   end
+
+  #   # if params[:tag]
+  #   #   @projects = Project.tagged_with(params[:tag])
+  #   # else
+  #   #   @projects = Project.all.order("expiration ASC")
+  #   # end
+  # end
+
   def index
     @search = Search.new(search_params)
     @categories = Category.all
-    if params[:category].present?
-       @projects = @projects.category(params[:category])
-    else
-      @projects = Project.where(nil).order("expiration ASC")
-    end
 
-    # if params[:tag]
-    #   @projects = Project.tagged_with(params[:tag])
-    # else
-    #   @projects = Project.all.order("expiration ASC")
-    # end
+    session[:search] = params[:search] if params[:search].present?
+    request = Project
+
+    return @projects = request.page(params[:page]).paginate(:page => params[:page], :per_page => 2) unless session[:search].present?
+
+    request = request.where(category: session[:search]['category']) if session[:search]['category'].present?
+    @projects = request.page(params[:page]).paginate(:page => params[:page], :per_page => 2)
   end
-
 
 
   def show
