@@ -4,8 +4,12 @@ class ProjectsController < ApplicationController
   def index
     @search = Search.new(search_params)
     @categories = Category.all
-    @projects = Project.where(nil).order("expiration ASC") # creates an anonymous scope
-    @projects = @projects.category(params[:category]) if params[:category].present?
+    if params[:category].present?
+       @projects = @projects.category(params[:category])
+    else
+      @projects = Project.where(nil).order("expiration ASC")
+    end
+
     # if params[:tag]
     #   @projects = Project.tagged_with(params[:tag])
     # else
