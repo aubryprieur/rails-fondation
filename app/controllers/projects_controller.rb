@@ -72,7 +72,7 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:title, :description, :link, :expiration, :all_tags, :category_id, :fondation_id)
+    params.require(:project).permit(:title, :description, :link, :expiration, :all_tags, :category_id, :fondation_id, :eligible_ids)
   end
 
     def search_params

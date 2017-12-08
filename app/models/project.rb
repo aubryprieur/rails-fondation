@@ -3,6 +3,8 @@ class Project < ApplicationRecord
   belongs_to :fondation
   has_many :taggings
   has_many :tags, through: :taggings
+  has_many :project_eligibles
+  has_many :eligibles, through: :project_eligibles
 
   scope :category, -> (category) { where category: category }
 

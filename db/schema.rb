@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171104143521) do
+ActiveRecord::Schema.define(version: 20171208143739) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,10 +21,25 @@ ActiveRecord::Schema.define(version: 20171104143521) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "eligibles", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "fondations", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "project_eligibles", force: :cascade do |t|
+    t.bigint "project_id"
+    t.bigint "eligible_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["eligible_id"], name: "index_project_eligibles_on_eligible_id"
+    t.index ["project_id"], name: "index_project_eligibles_on_project_id"
   end
 
   create_table "projects", force: :cascade do |t|
@@ -72,6 +87,8 @@ ActiveRecord::Schema.define(version: 20171104143521) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "project_eligibles", "eligibles"
+  add_foreign_key "project_eligibles", "projects"
   add_foreign_key "projects", "categories"
   add_foreign_key "projects", "fondations"
   add_foreign_key "taggings", "projects"

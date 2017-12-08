@@ -28,6 +28,7 @@
             <p><span>Date limite de dépôt des projets:</span> <%= project.expiration.strftime("%d/%m/%Y") %></p>
             <p><span>Catégorie:</span> <%= project.category.title %></p>
             <p><span>Fondation:</span> <%= project.fondation.title %></p>
+            <p><span>Public(s) Eligible(s):</span> <%= project.eligibles.name %></p>
             <p><span>Public(s) Eligible(s):</span> <%=raw tag_links(project.all_tags)%></p>
           </div>
           <p class="text-right"><%= link_to ">> accéder à l'appel à projet", project.link, :target => '_blank' %></p>
