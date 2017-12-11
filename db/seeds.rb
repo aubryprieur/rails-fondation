@@ -4,17 +4,21 @@ Project.destroy_all
 Fondation.destroy_all
 Category.destroy_all
 Eligible.destroy_all
+ProjectEligible.destroy_all
 
 puts "----------"
 puts "Creating eligible public"
-eligibles = [ "Secteur ESS (association, coopérative...)",
-  "Secteur public (collectivité...)",
-  "Entreprise privée lucrative (SARL, SA...",
-  "Personne physique (particulier, artiste...)"
-  ]
-  eligibles.each do |eligible|
-  p Eligible.create!(name:eligible)
-end
+# eligibles = [ "Secteur ESS (association, coopérative...)",
+#   "Secteur public (collectivité...)",
+#   "Entreprise privée lucrative (SARL, SA...",
+#   "Personne physique (particulier, artiste...)"
+#   ]
+  # eligibles.each do |eligible|
+  p eligible1 = Eligible.create!(name: "Secteur ESS (association, coopérative...)")
+  p eligible2 = Eligible.create!(name: "Secteur public (collectivité...)")
+  p eligible3 = Eligible.create!(name: "Entreprise privée lucrative (SARL, SA...")
+  p eligible4 = Eligible.create!(name: "Personne physique (particulier, artiste...)")
+# end
 
 puts "----------"
 puts 'Creating categories...'
@@ -49,18 +53,23 @@ end
 
 puts "----------"
 puts 'Creating fondations...'
-require "open-uri"
-require "nokogiri"
- i = 0
- until i > 4425
-    doc = "http://www.centre-francais-fondations.org/fondations-fonds-de-dotation/annuaire/annuaires-1/?toutes=1&b_start:int=#{i}"
-    fondations = Nokogiri::HTML(open(doc).read)
-    fondations.search(".liste-fondation li").each do |e|
-      title = e.search('a').text.strip.gsub("\n, ", "")
-      p fondations = Fondation.create!(title:title)
-    end
-   i += 15
- end
+# require "open-uri"
+# require "nokogiri"
+
+#  i = 0
+#  until i > 4425
+#     doc = "http://www.centre-francais-fondations.org/fondations-fonds-de-dotation/annuaire/annuaires-1/?toutes=1&b_start:int=#{i}"
+#     fondations = Nokogiri::HTML(open(doc).read)
+#     fondations.search(".liste-fondation li").each do |e|
+#       title = e.search('a').text.strip.gsub("\n, ", "")
+#       p Fondation.create!(title:title)
+#     end
+#    i += 15
+#  end
+fondations = ["Fondation de France"]
+  fondations.each do |fondation|
+  p Fondation.create!(title:fondation)
+end
 
  puts "----------"
 puts 'Creating projects...'
@@ -70,7 +79,7 @@ p project1 = Project.create!(
   link: "https://www.fondationdefrance.org/fr/sport-et-sante-en-milieu-rural-0",
   expiration: "21/02/2018",
   category: Category.find_or_create_by(title: categories[8]),
-  fondation: Fondation.find_or_create_by(title: fondations[1082])
+  fondation: Fondation.find_or_create_by(title: fondations[0])
   )
 p project2 = Project.create!(
   title: "En 2017, le prix Frédéric de Carfort récompensera une peinture",
@@ -79,7 +88,7 @@ Le Prix Frédéric de Carfort 2017 sera attribué à une oeuvre de peinture.",
   link: "https://www.fondationdefrance.org/fr/en-2017-le-prix-frederic-de-carfort-recompensera-une-peinture",
   expiration: "24/11/2017",
   category: Category.find_or_create_by(title: categories[0]),
-  fondation: Fondation.find_or_create_by(title: fondations[1082])
+  fondation: Fondation.find_or_create_by(title: fondations[0])
   )
 p project3 = Project.create!(
   title: "Le Prix Lacourière récompense un graveur en taille-douce",
@@ -87,7 +96,7 @@ p project3 = Project.create!(
   link: "https://www.fondationdefrance.org/fr/le-prix-lacouriere-recompense-un-graveur-en-taille-douce",
   expiration: " 07/04/2018",
   category: Category.find_or_create_by(title: categories[0]),
-  fondation: Fondation.find_or_create_by(title: fondations[1082])
+  fondation: Fondation.find_or_create_by(title: fondations[0])
   )
 p project4 = Project.create!(
   title: "Allez les filles !",
@@ -95,26 +104,26 @@ p project4 = Project.create!(
   link: "https://www.fondationdefrance.org/fr/sport-et-sante-en-milieu-rural-0",
   expiration: "17/01/2018",
   category: Category.find_or_create_by(title: categories[8]),
-  fondation: Fondation.find_or_create_by(title: fondations[1082])
+  fondation: Fondation.find_or_create_by(title: fondations[0])
     )
 
 # puts "----------"
 # puts 'Creating project_eligible...'
 # projecteligible1 = ProjectEligible.create!(
 #   project: project1,
-#   eligible: eligibles[0], eligibles[1]
+#   eligible: [name:eligible1, name:eligible2]
 #   )
 # projecteligible2 = ProjectEligible.create!(
 #   project: project2,
-#   eligible: eligibles[3]
+#   eligible: eligible4
 #   )
 # projecteligible3 = ProjectEligible.create!(
 #   project: project3,
-#   eligible: eligibles[3]
+#   eligible: eligible4
 #   )
 # projecteligible4 = ProjectEligible.create!(
 #   project: project4,
-#   eligible: eligibles[0],eligibles[1]
+#   eligible: [name:eligible1, name:eligible2]
 #   )
 
 
