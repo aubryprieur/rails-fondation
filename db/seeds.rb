@@ -98,24 +98,24 @@ p project4 = Project.create!(
   fondation: Fondation.find_or_create_by(title: fondations[1082])
     )
 
-puts "----------"
-puts 'Creating project_eligible...'
-projecteligible1 = ProjectEligible.create!(
-  project: project1,
-  eligible: eligibles[0], eligibles[1]
-  )
-projecteligible2 = ProjectEligible.create!(
-  project: project2,
-  eligible: eligibles[3]
-  )
-projecteligible3 = ProjectEligible.create!(
-  project: project3,
-  eligible: eligibles[3]
-  )
-projecteligible4 = ProjectEligible.create!(
-  project: project4,
-  eligible: eligibles[0],eligibles[1]
-  )
+# puts "----------"
+# puts 'Creating project_eligible...'
+# projecteligible1 = ProjectEligible.create!(
+#   project: project1,
+#   eligible: eligibles[0], eligibles[1]
+#   )
+# projecteligible2 = ProjectEligible.create!(
+#   project: project2,
+#   eligible: eligibles[3]
+#   )
+# projecteligible3 = ProjectEligible.create!(
+#   project: project3,
+#   eligible: eligibles[3]
+#   )
+# projecteligible4 = ProjectEligible.create!(
+#   project: project4,
+#   eligible: eligibles[0],eligibles[1]
+#   )
 
 
 
