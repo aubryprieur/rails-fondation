@@ -1,25 +1,10 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
-  # def index
-  #   @search = Search.new(search_params)
-  #   @categories = Category.all
-  #   if params[:category].present?
-  #      @projects = @projects.category(params[:category]).paginate(:page => params[:page], :per_page => 2)
-  #   else
-  #     @projects = Project.where(nil).order("expiration ASC").paginate(:page => params[:page], :per_page => 2)
-  #   end
-
-  #   # if params[:tag]
-  #   #   @projects = Project.tagged_with(params[:tag])
-  #   # else
-  #   #   @projects = Project.all.order("expiration ASC")
-  #   # end
-  # end
-
   def index
     @search = Search.new(search_params)
     @categories = Category.all
+    @eligibles = Eligible.all
 
     session[:search] = params[:search] if params[:search].present?
     request = Project
@@ -27,6 +12,9 @@ class ProjectsController < ApplicationController
     return @projects = request.page(params[:page]).order("expiration ASC").paginate(:page => params[:page], :per_page => 2) unless session[:search].present?
 
     request = request.where(category: session[:search]['category']) if session[:search]['category'].present?
+    request = request.joins(:eligibles).where(eligibles: session[:search]['eligibles']) if session[:search]['eligibles'].present?
+
+
     @projects = request.page(params[:page]).order("expiration ASC").paginate(:page => params[:page], :per_page => 2)
   end
 
@@ -72,7 +60,7 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:title, :description, :link, :expiration, :all_tags, :category_id, :fondation_id, :eligible_ids)
+    params.require(:project).permit(:title, :description, :link, :expiration, :all_tags, :category_id, :fondation_id, eligible_ids: [])
   end
 
     def search_params

@@ -7,6 +7,7 @@ class Project < ApplicationRecord
   has_many :eligibles, through: :project_eligibles
 
   scope :category, -> (category) { where category: category }
+  scope :eligibles, -> (eligibles) { where eligibles: eligibles }
 
   def all_tags=(names)
   self.tags = names.split(",").map do |name|

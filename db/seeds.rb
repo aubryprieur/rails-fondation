@@ -14,10 +14,10 @@ puts "Creating eligible public"
 #   "Personne physique (particulier, artiste...)"
 #   ]
   # eligibles.each do |eligible|
-  p eligible1 = Eligible.create!(name: "Secteur ESS (association, coopérative...)")
-  p eligible2 = Eligible.create!(name: "Secteur public (collectivité...)")
-  p eligible3 = Eligible.create!(name: "Entreprise privée lucrative (SARL, SA...")
-  p eligible4 = Eligible.create!(name: "Personne physique (particulier, artiste...)")
+  p eligible1 = Eligible.create!(title: "Secteur ESS (association, coopérative...)")
+  p eligible2 = Eligible.create!(title: "Secteur public (collectivité...)")
+  p eligible3 = Eligible.create!(title: "Entreprise privée lucrative (SARL, SA...")
+  p eligible4 = Eligible.create!(title: "Personne physique (particulier, artiste...)")
 # end
 
 puts "----------"
@@ -104,6 +104,19 @@ p project4 = Project.create!(
   link: "https://www.fondationdefrance.org/fr/sport-et-sante-en-milieu-rural-0",
   expiration: "17/01/2018",
   category: Category.find_or_create_by(title: categories[8]),
+  fondation: Fondation.find_or_create_by(title: fondations[0])
+    )
+p project5 = Project.create!(
+  title: "Emploi et activité : des solutions innovantes et solidaires pour une société numérique intégrante",
+  description: "L’accès pour tous aux moyens d’une vie décente est une question universelle.
+  Nos sociétés contemporaines y ont répondu en faisant du travail la source essentielle du revenu.
+  La déclaration universelle des droits de l’homme établit d’ailleurs que « toute personne a droit au travail […] et à une rémunération équitable et satisfaisante lui assurant ainsi qu’à sa famille une existence conforme à la dignité humaine ».
+  Le monde du travail est aujourd’hui confronté à de profondes mutations qui induisent de nouvelles vulnérabilités.
+  Les difficultés face à l’emploi concernent désormais toutes les catégories de population, tout en prenant des formes diverses selon l’âge, le diplôme et l’expérience des personnes : privation totale ou partielle, contrats de courte durée, cumul d’activités et temps de travail éclaté, gestion des transitions entre différents statuts, etc.
+  Il est également indispensable de prendre en compte le rôle de la révolution numérique - porteuse de promesses et d’inquiétudes nouvelles - dans les métamorphoses actuelles de la société. Ainsi, les réalités du travail et de l’emploi telles qu’elles s’étaient stabilisées au cours du XXe siècle, évoluent fortement. De nouvelles garanties sociales, collectives et attachées à la personne sont à inventer.",
+  link: "https://www.fondationdefrance.org/fr/emploi-et-activite-des-solutions-innovantes-et-solidaires-pour-une-societe-numerique-integrante",
+  expiration: "24/01/2018",
+  category: Category.find_or_create_by(title: categories[15]),
   fondation: Fondation.find_or_create_by(title: fondations[0])
     )
 
