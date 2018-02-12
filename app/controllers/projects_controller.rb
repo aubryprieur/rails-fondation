@@ -1,7 +1,9 @@
+require 'date'
+
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
-require 'date'
+
 
   def index
     @search = Search.new(search_params)
@@ -13,6 +15,7 @@ require 'date'
 
     return @projects = request.order("expiration ASC").paginate(:page => params[:page], :per_page => 2) unless session[:search].present?
 
+    request = request.where('expiration > ?', Date.today)
     request = request.where(category: session[:search]['category']) if session[:search]['category'].present?
     request = request.joins(:project_eligibles).where(project_eligibles: {eligible_id: session[:search]['eligible']}) if session[:search]['eligible'].present?
 
