@@ -12,8 +12,8 @@ class ProjectsController < ApplicationController
     return @projects = request.page(params[:page]).order("expiration ASC").paginate(:page => params[:page], :per_page => 2) unless session[:search].present?
 
     request = request.where(category: session[:search]['category']) if session[:search]['category'].present?
-    request = request.joins(:eligibles).where(eligibles: session[:search]['eligibles']) if session[:search]['eligibles'].present?
-
+    # request = request.joins(:eligibles).where(eligibles: session[:search]['eligibles']) if session[:search]['eligibles'].present?
+    # request = request.joins(:eligibles).where(session[:search]['eligibles'])
 
     @projects = request.page(params[:page]).order("expiration ASC").paginate(:page => params[:page], :per_page => 2)
   end
