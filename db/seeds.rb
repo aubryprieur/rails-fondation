@@ -1,4 +1,5 @@
 puts 'Cleaning database...'
+User.destroy_all
 Tag.destroy_all
 Project.destroy_all
 Fondation.destroy_all
@@ -6,19 +7,19 @@ Category.destroy_all
 Eligible.destroy_all
 ProjectEligible.destroy_all
 
+
+puts "----------"
+puts "Creating user"
+user1 = User.create!(email: "aubry.prieur@gmail.com", password: "mapupuce", password_confirmation: "mapupuce")
+
+
 puts "----------"
 puts "Creating eligible public"
-# eligibles = [ "Secteur ESS (association, coopérative...)",
-#   "Secteur public (collectivité...)",
-#   "Entreprise privée lucrative (SARL, SA...",
-#   "Personne physique (particulier, artiste...)"
-#   ]
-  # eligibles.each do |eligible|
   p eligible1 = Eligible.create!(title: "Secteur ESS (association, coopérative...)")
   p eligible2 = Eligible.create!(title: "Secteur public (collectivité...)")
   p eligible3 = Eligible.create!(title: "Entreprise privée lucrative (SARL, SA...")
   p eligible4 = Eligible.create!(title: "Personne physique (particulier, artiste...)")
-# end
+
 
 puts "----------"
 puts 'Creating categories...'
@@ -79,7 +80,8 @@ p project1 = Project.create!(
   link: "https://www.fondationdefrance.org/fr/sport-et-sante-en-milieu-rural-0",
   expiration: "21/02/2018",
   category: Category.find_or_create_by(title: categories[8]),
-  fondation: Fondation.find_or_create_by(title: fondations[0])
+  fondation: Fondation.find_or_create_by(title: fondations[0]),
+  eligible_ids: [1, 2]
   )
 p project2 = Project.create!(
   title: "En 2017, le prix Frédéric de Carfort récompensera une peinture",
@@ -88,7 +90,8 @@ Le Prix Frédéric de Carfort 2017 sera attribué à une oeuvre de peinture.",
   link: "https://www.fondationdefrance.org/fr/en-2017-le-prix-frederic-de-carfort-recompensera-une-peinture",
   expiration: "24/11/2017",
   category: Category.find_or_create_by(title: categories[0]),
-  fondation: Fondation.find_or_create_by(title: fondations[0])
+  fondation: Fondation.find_or_create_by(title: fondations[0]),
+  eligible_ids: [4]
   )
 p project3 = Project.create!(
   title: "Le Prix Lacourière récompense un graveur en taille-douce",
@@ -96,7 +99,8 @@ p project3 = Project.create!(
   link: "https://www.fondationdefrance.org/fr/le-prix-lacouriere-recompense-un-graveur-en-taille-douce",
   expiration: " 07/04/2018",
   category: Category.find_or_create_by(title: categories[0]),
-  fondation: Fondation.find_or_create_by(title: fondations[0])
+  fondation: Fondation.find_or_create_by(title: fondations[0]),
+  eligible_ids: [4]
   )
 p project4 = Project.create!(
   title: "Allez les filles !",
@@ -104,7 +108,8 @@ p project4 = Project.create!(
   link: "https://www.fondationdefrance.org/fr/sport-et-sante-en-milieu-rural-0",
   expiration: "17/01/2018",
   category: Category.find_or_create_by(title: categories[8]),
-  fondation: Fondation.find_or_create_by(title: fondations[0])
+  fondation: Fondation.find_or_create_by(title: fondations[0]),
+  eligible_ids: [1, 2]
     )
 p project5 = Project.create!(
   title: "Emploi et activité : des solutions innovantes et solidaires pour une société numérique intégrante",
@@ -117,27 +122,11 @@ p project5 = Project.create!(
   link: "https://www.fondationdefrance.org/fr/emploi-et-activite-des-solutions-innovantes-et-solidaires-pour-une-societe-numerique-integrante",
   expiration: "24/01/2018",
   category: Category.find_or_create_by(title: categories[15]),
-  fondation: Fondation.find_or_create_by(title: fondations[0])
+  fondation: Fondation.find_or_create_by(title: fondations[0]),
+  eligible_ids: [1, 2, 3]
     )
 
-# puts "----------"
-# puts 'Creating project_eligible...'
-# projecteligible1 = ProjectEligible.create!(
-#   project: project1,
-#   eligible: [name:eligible1, name:eligible2]
-#   )
-# projecteligible2 = ProjectEligible.create!(
-#   project: project2,
-#   eligible: eligible4
-#   )
-# projecteligible3 = ProjectEligible.create!(
-#   project: project3,
-#   eligible: eligible4
-#   )
-# projecteligible4 = ProjectEligible.create!(
-#   project: project4,
-#   eligible: [name:eligible1, name:eligible2]
-#   )
+
 
 
 
