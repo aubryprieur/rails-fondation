@@ -9,6 +9,11 @@
     <% end %>
   </p>
   <p><span>Fondation:</span> <%= @project.fondation.title %></p>
+  <%- unless current_user.favorite_projects.exists?(id: @project.id) -%>
+<%= link_to 'Add to favorites', favorite_projects_path(project_id: @project), method: :post %>
+<%- else -%>
+<%= link_to 'Remove from favorites', favorite_project_path(@project), method: :delete %>
+<%- end -%>
   <p><%= link_to ">>> retourner à l'index", projects_path %></p>
   <p class="text-right"><%= link_to ">> accéder à l'appel à projet", @project.link, :target => '_blank' %></p>
 </div>
