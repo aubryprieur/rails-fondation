@@ -1,19 +1,34 @@
 <div class="container">
-  <h2><%= @project.title %></h2>
+  <div class="row">
+    <div class="col-lg-11">
+      <h2><%= @project.title %></h2>
+    </div>
+    <div class="col-lg-1">
+      <%- unless current_user.favorite_projects.exists?(id: @project.id) -%>
+        <%= link_to favorite_projects_path(project_id: @project), method: :post do %>
+          <i class="far fa-heart fa-2x align-middle" style="color:#DE6860"></i>
+        <% end %>
+      <%- else -%>
+        <%= link_to favorite_project_path(@project), method: :delete do %>
+          <i class="fas fa-heart fa-2x" style="color: #DE6860"></i>
+        <% end %>
+      <%- end -%>
+    </div>
+  </div>
   <p><%= @project.description %></p>
   <p><span>Date limite de dépôt des projets:</span> <%= @project.expiration.strftime("%d/%m/%Y") %></p>
   <p><span>Catégorie:</span> <button class="btn btn-xs btn-success disabled"><%= @project.category.title %></button></p>
   <p><span>Public(s) Eligible(s):</span>
-  <% @project.eligibles.to_a.each do |eligible| %>
-    <button class="btn btn-xs btn-primary disabled""> <%= eligible.title %></button>
+    <% @project.eligibles.to_a.each do |eligible| %>
+      <button class="btn btn-xs btn-primary disabled""> <%= eligible.title %></button>
     <% end %>
   </p>
   <p><span>Fondation:</span> <%= @project.fondation.title %></p>
-  <%- unless current_user.favorite_projects.exists?(id: @project.id) -%>
-<%= link_to 'Add to favorites', favorite_projects_path(project_id: @project), method: :post %>
-<%- else -%>
-<%= link_to 'Remove from favorites', favorite_project_path(@project), method: :delete %>
-<%- end -%>
-  <p><%= link_to ">>> retourner à l'index", projects_path %></p>
+
+  <p>
+    <%= link_to projects_path do %>
+      <i class="fas fa-undo-alt"></i> Retourner à l'index
+    <% end %>
+  </p>
   <p class="text-right"><%= link_to ">> accéder à l'appel à projet", @project.link, :target => '_blank' %></p>
 </div>

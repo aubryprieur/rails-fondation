@@ -23,7 +23,22 @@
   <div>
     <% @projects.each do |project| %>
       <div class="project-content">
-          <h2><%= project.title %></h2>
+            <div class="row">
+    <div class="col-lg-11">
+      <h2><%= project.title %></h2>
+    </div>
+    <div class="col-lg-1">
+      <%- unless current_user.favorite_projects.exists?(id: project.id) -%>
+        <%= link_to favorite_projects_path(project_id: project), method: :post do %>
+          <i class="far fa-heart fa-2x align-middle" style="color:#DE6860"></i>
+        <% end %>
+      <%- else -%>
+        <%= link_to favorite_project_path(project), method: :delete do %>
+          <i class="fas fa-heart fa-2x" style="color: #DE6860"></i>
+        <% end %>
+      <%- end -%>
+    </div>
+  </div>
           <div class="project-description">
             <p><%= project.description %></p>
           </div>
@@ -37,7 +52,11 @@
               <% end %>
             </p>
           </div>
-          <p><%= link_to "+ d'informations", project_path(project) %></p>
+          <p>
+            <%= link_to project_path(project) do %>
+              <i class="fas fa-info"></i>+ d'information
+            <% end %>
+          </p>
         </div>
     <% end %>
   </div>
