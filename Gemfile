@@ -18,6 +18,7 @@ gem 'simple_form'
 gem 'uglifier'
 gem 'filterrific'
 gem 'will_paginate'
+gem 'kaminari'
 gem 'activeadmin', github: 'activeadmin/activeadmin'
 gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 
