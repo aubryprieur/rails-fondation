@@ -7,15 +7,15 @@ class FavoriteProjectsController < ApplicationController
 
   def create
     if Favorite.create(favorited: @project, user: current_user)
-      redirect_to @project, notice: "L'appel à projet à été ajouté dans vos favoris"
+      redirect_to favorites_path, notice: "L'appel à projet à été ajouté dans vos favoris"
     else
-      redirect_to @project, alert: 'Something went wrong...*sad panda*'
+      redirect_to projects_path, alert: 'Something went wrong...*sad panda*'
     end
   end
 
   def destroy
     Favorite.where(favorited_id: @project.id, user_id: current_user.id).first.destroy
-    redirect_to @project, alert: "L'appel à projet a été supprimé de vos favoris"
+    redirect_to favorites_path, alert: "L'appel à projet a été supprimé de vos favoris"
   end
 
   private

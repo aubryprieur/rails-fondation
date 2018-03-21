@@ -1,5 +1,5 @@
 <div class="container">
-  <h2 class="text-center">Mes favoris</h2>
+  <h2 class="text-center favori-title">Mes favoris</h2>
   <p>
     <%= link_to projects_path do %>
       <i class="fas fa-undo-alt"></i> Retourner à l'index
@@ -9,43 +9,58 @@
   <% if @projects.blank? %>
     <p>Vous n'avez pas d'appels à projet de sauvegardé.</p>
   <% end %>
-  <% @projects.each do |project| %>
+  <div>
+    <% @projects.each do |project| %>
     <div class="project-content">
-        <div class="row">
-    <div class="col-lg-11">
-      <h2><%= project.title %></h2>
-    </div>
-    <div class="col-lg-1">
-      <%- unless current_user.favorite_projects.exists?(id: project.id) -%>
-        <%= link_to favorite_projects_path(project_id: project), method: :post do %>
-          <i class="far fa-heart fa-2x align-middle" style="color:#DE6860"></i>
-        <% end %>
-      <%- else -%>
-        <%= link_to favorite_project_path(project), method: :delete do %>
-          <i class="fas fa-heart fa-2x" style="color: #DE6860"></i>
-        <% end %>
-      <%- end -%>
-    </div>
-  </div>
+      <div class="row">
+        <div class="col-lg-11">
+          <h2><%= project.title.mb_chars.upcase %></h2>
+        </div>
+        <div class="col-lg-1">
+          <%- unless current_user.favorite_projects.exists?(id: project.id) -%>
+          <%= link_to favorite_projects_path(project_id: project), method: :post do %>
+          <i class="far fa-bookmark fa-2x align-middle" style="color:#DE6860"></i>
+          <% end %>
+          <%- else -%>
+          <%= link_to favorite_project_path(project), method: :delete do %>
+          <i class="fas fa-bookmark fa-2x" style="color: #DE6860"></i>
+          <% end %>
+          <%- end -%>
+        </div>
+      </div>
       <div class="project-description">
         <p><%= project.description %></p>
       </div>
       <div class="project-info">
-        <p><span>Date limite de dépôt des projets:</span> <%= project.expiration.strftime("%d/%m/%Y") %></p>
-        <p><span>Catégorie:</span> <button class="btn btn-xs btn-success disabled"><%= project.category.title %></button></p>
-        <p><span>Fondation:</span> <%= project.fondation.title %></p>
-        <p><span>Public(s) Eligible(s):</span>
-          <% project.eligibles.to_a.each do |eligible| %>
-           <button class="btn btn-xs btn-primary disabled""> <%= eligible.title %></button>
-          <% end %>
-        </p>
+        <div class="row">
+          <div class="col-md-6">
+            <p><span>Fondation:</span> <%= project.fondation.title %></p>
+          </div>
+          <div class="col-md-6">
+            <p><span>Catégorie:</span> <button class="btn btn-xs btn-success disabled"><%= project.category.title %></button></p>
+          </div>
+          <div class="col-md-6">
+            <p><span>Date limite de dépôt des projets:</span> <%= project.expiration.strftime("%d/%m/%Y") %></p>
+          </div>
+          <div class="col-md-6">
+            <p>
+              <span>Public(s) Eligible(s):</span>
+              <% project.eligibles.to_a.each do |eligible| %>
+                <button class="btn btn-xs btn-primary disabled""> <%= eligible.title %></button>
+              <% end %>
+            </p>
+          </div>
       </div>
+    </div>
+    <div class="more-information">
       <p>
         <%= link_to project_path(project) do %>
-          <i class="fas fa-info"></i>+ d'information
+        <i class="fas fa-info"></i>+ d'information
         <% end %>
       </p>
     </div>
+  </div>
   <% end %>
+</div>
 </div>
 

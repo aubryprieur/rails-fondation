@@ -7,6 +7,10 @@
 .project-content {
   border-bottom: solid;
   border-color: white;
+  h2 {
+    font-size: 20px;
+    font-weight: bold;
+  }
 }
 
 .ao-count {
@@ -29,9 +33,42 @@
 }
 
 .project-description {
+  font-size: 12px;
   font-style: italic;
 }
 
-.project-info span {
-  font-weight: bold;
+.project-info {
+  span {
+    font-size: 12px;
+    font-weight: bold;
+  }
+  p {
+    font-size: 12px;
+  }
 }
+
+button {
+  font-size: 10px !important;
+}
+
+.more-information {
+  font-size: 12px;
+}
+
+.sort-expiration {
+  font-size: 14px;
+  background: white;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  .sort-link {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+.favori-title {
+  background: white;
+  border-radius: 15px;
+  padding: 10px;
+}
+
