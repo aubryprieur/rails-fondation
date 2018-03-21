@@ -10,8 +10,14 @@
     <% if user_signed_in? %>
 
       <!-- Links when logged in -->
-
-      <%= link_to "Mes appels à projet", favorites_path, class: "navbar-wagon-item navbar-wagon-link" %>
+      <% if current_user.admin == true %>
+        <%= link_to admin_root_path, class: "navbar-wagon-item navbar-wagon-link" do %>
+          <i class="fas fa-unlock-alt"></i> Admin
+        <% end %>
+      <% end %>
+      <%= link_to favorites_path, class: "navbar-wagon-item navbar-wagon-link" do %>
+        <i class="far fa-bookmark"></i> Mes favoris
+      <% end %>
 
       <!-- Avatar with dropdown menu -->
       <div class="navbar-wagon-item">
@@ -30,7 +36,7 @@
             </li>
             <li>
               <%= link_to destroy_user_session_path, method: :delete do %>
-                <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
+                <i class="fas fa-sign-out-alt"></i>  <%= t(".sign_out", default: "Log out") %>
               <% end %>
             </li>
           </ul>
@@ -47,9 +53,10 @@
     <div class="dropdown">
       <i class="fa fa-bars dropdown-toggle" data-toggle="dropdown"></i>
       <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
-        <li><a href="#">Some mobile link</a></li>
-        <li><a href="#">Other one</a></li>
-        <li><a href="#">Other one</a></li>
+        <li><%= link_to "Mes favoris", favorites_path(@projects) %></li>
+        <% if current_user.admin == true %>
+          <li><%= link_to "Admin", admin_root_path %></li>
+        <% end %>
       </ul>
     </div>
   </div>

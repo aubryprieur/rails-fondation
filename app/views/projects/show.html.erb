@@ -6,11 +6,11 @@
     <div class="col-lg-1">
       <%- unless current_user.favorite_projects.exists?(id: @project.id) -%>
         <%= link_to favorite_projects_path(project_id: @project), method: :post do %>
-          <i class="far fa-heart fa-2x align-middle" style="color:#DE6860"></i>
+          <i class="far fa-bookmark fa-2x align-middle" style="color:#DE6860"></i>
         <% end %>
       <%- else -%>
         <%= link_to favorite_project_path(@project), method: :delete do %>
-          <i class="fas fa-heart fa-2x" style="color: #DE6860"></i>
+          <i class="fas fa-bookmark fa-2x" style="color: #DE6860"></i>
         <% end %>
       <%- end -%>
     </div>
