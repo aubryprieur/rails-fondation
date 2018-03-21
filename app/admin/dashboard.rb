@@ -19,6 +19,7 @@ ActiveAdmin.register_page "Dashboard" do
             li link_to("Les catégories (créer, éditer ou effacer)", admin_categories_path)
             li link_to("Les publics éligibles (créer, éditer ou effacer)", admin_eligibles_path)
             li link_to("Les fondations (créer, éditer ou effacer)", admin_fondations_path)
+            li link_to("Relation appels à projet/publics éligibles (créer, éditer ou effacer)", admin_project_eligibles_path)
           end
         end
       end
