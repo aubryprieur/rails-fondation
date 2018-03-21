@@ -12,9 +12,6 @@
         <%= f.input :eligible, :include_blank => "Tous publics", required: false, label: false, collection: @eligibles, class: 'form-control' %>
       </div>
       <div>
-        <%= link_to "Date limite proche", sort: "expiration ASC" %> <%= link_to "Date limite eloignée", sort: "expiration DESC" %>
-      </div>
-      <div>
         <%= f.submit 'GO', class: 'btn btn-primary paddind-category btn-from-search' %>
       </div>
       <% end %>
@@ -22,6 +19,18 @@
   </div>
   <div class="ao-count">
     <p><strong>Actuellement, <%= @projects.count %> appels à projet sont en cours. </strong></p>
+    <div class="text-right sort-expiration">
+      <span class="sort-link">
+        <%= link_to sort: "expiration ASC" do %>
+          <i class="fas fa-sort-amount-up"></i> Ordre ascendant
+        <% end %>
+      </span>
+      <span class="sort-link">
+        <%= link_to sort: "expiration DESC" do %>
+          <i class="fas fa-sort-amount-down"></i> Ordre descendant
+        <% end %>
+      </span>
+  </div>
   </div>
   <div>
     <% @projects.each do |project| %>
