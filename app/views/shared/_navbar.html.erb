@@ -16,7 +16,7 @@
         <% end %>
       <% end %>
       <%= link_to favorites_path, class: "navbar-wagon-item navbar-wagon-link" do %>
-        <i class="far fa-bookmark"></i> Mes favoris
+        <i class="far fa-bookmark"></i> Mes favoris (<%= @favorite_projects.count %>)
       <% end %>
 
       <!-- Avatar with dropdown menu -->
