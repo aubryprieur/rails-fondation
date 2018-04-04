@@ -1,5 +1,6 @@
 class FavoriteProjectsController < ApplicationController
   before_action :set_project, only: [:create, :destroy]
+  before_action :favorites
 
   def index
     @projects = current_user.favorite_projects
@@ -23,4 +24,9 @@ class FavoriteProjectsController < ApplicationController
   def set_project
     @project = Project.find(params[:project_id] || params[:id])
   end
+
+  def favorites
+    @favorite_projects = current_user.favorite_projects
+  end
+
 end

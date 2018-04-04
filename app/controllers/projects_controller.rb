@@ -2,7 +2,7 @@ require 'date'
 
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
-
+  before_action :favorites
 
 
   def index
@@ -75,6 +75,10 @@ class ProjectsController < ApplicationController
     else
       session[:search]
     end
+  end
+
+  def favorites
+    @favorite_projects = current_user.favorite_projects
   end
 
 end
