@@ -3,6 +3,8 @@ class PagesController < ApplicationController
   before_action :favorites
 
   def home
+    @fondations = Fondation.all
+    @projects = Project.all
   end
 
   private
