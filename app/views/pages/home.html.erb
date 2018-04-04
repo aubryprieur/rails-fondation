@@ -1,7 +1,29 @@
+<link rel="stylesheet" href="http://github.hubspot.com/odometer/themes/odometer-theme-train-station.css" />
+<script src="http://github.hubspot.com/odometer/odometer.js"></script>
+
+
 <%= render 'banner' %>
-<div class="text-center">
-  <span><%= @fondations.count %> fondations</span> et
-  <span><%= @projects.count %> financements sur Fondabase !</span>
+<div class="text-center odometer-front">
+  Vous trouverez sur Fondabase :
+  <div id="odometer" class="odometer">0</div> fondations et
+  <div id="odometer2" class="odometer">0</div> appels à projet
 </div>
 <%= render 'homecard' %>
 <%= render 'banner-price' %>
+
+
+<!-- Odometr includes -->
+<script>
+  setTimeout(function(){
+    odometer2.innerHTML = <%= @projects.count %> ;
+  }, 1000);
+    setTimeout(function(){
+    odometer.innerHTML = <%= @fondations.count %> ;
+  }, 1000);
+</script>
+
+
+
+
+
+
