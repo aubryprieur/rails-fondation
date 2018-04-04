@@ -40,18 +40,24 @@
     <div class="project-content">
       <div class="row">
         <div class="col-lg-11">
+          <% if project.expiration >= Date.today - 15.day %>
+            <span class="project-expiration"><i class="fas fa-bell"></i> Bientôt expiré !</span>
+          <% end %>
+          <% if project.created_at <= Date.today - 15.day %>
+            <span class="project-new"><i class="fas fa-bullhorn"></i> New</span>
+          <% end %>
           <h2><%= project.title.mb_chars.upcase %></h2>
         </div>
         <div class="col-lg-1">
-          <%- unless current_user.favorite_projects.exists?(id: project.id) -%>
+          <% unless current_user.favorite_projects.exists?(id: project.id) %>
           <%= link_to favorite_projects_path(project_id: project), method: :post do %>
           <i class="far fa-bookmark fa-2x align-middle" style="color:#DE6860"></i>
           <% end %>
-          <%- else -%>
+          <% else %>
           <%= link_to favorite_project_path(project), method: :delete do %>
           <i class="fas fa-bookmark fa-2x" style="color: #DE6860"></i>
           <% end %>
-          <%- end -%>
+          <% end %>
         </div>
       </div>
       <div class="project-description">
