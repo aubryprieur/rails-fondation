@@ -1,6 +1,12 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-11">
+      <% if @project.expiration >= Date.today - 15.day %>
+        <span class="project-expiration"><i class="fas fa-bell"></i> Bientôt expiré !</span>
+      <% end %>
+      <% if @project.created_at <= Date.today - 15.day %>
+        <span class="project-new"><i class="fas fa-bullhorn"></i> New</span>
+      <% end %>
       <h2><%= @project.title %></h2>
     </div>
     <div class="col-lg-1">
