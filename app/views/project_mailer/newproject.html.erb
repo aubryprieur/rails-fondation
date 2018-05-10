@@ -1,7 +1,7 @@
 
-<p>Bonjour <%= @user.name %>,</p>
+<p>Bonjour,</p>
 
-<p>FondaBase a trouvé pour vous un nouvelle appel à projet :</p>
-<p><%= @project.title %>, lien : <%= @project_path %></p>
-
-<p>See ya!</p>
+<p>FondaBase a trouvé pour vous un nouvel appel à projet :</p>
+<%= link_to @project.title, project_url(@project)  %>
+<p><%= @project.description %></p>
+<p><%= @project.fondation.title %></p>

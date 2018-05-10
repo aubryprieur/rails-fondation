@@ -7,14 +7,10 @@ class ProjectMailer < ApplicationMailer
   #
   def newproject(project)
     @project = project
-    @users = User.all
-
-    @users.each do |user|
       mail(
-        to:       user.email,
+        to:       User.last,
         subject:  "Un nouvel appel à projet sur FondaBase !"
       )
-    end
   end
 
 end
