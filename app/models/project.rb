@@ -1,4 +1,6 @@
 class Project < ApplicationRecord
+  after_create :send_newproject_email
+
   belongs_to :category
   belongs_to :fondation
   has_many :taggings
@@ -6,7 +8,7 @@ class Project < ApplicationRecord
   has_many :project_eligibles
   has_many :eligibles, through: :project_eligibles
 
-  # scope :category, -> (category) { where category: category }
+  # recherche texte des appels à projet
   include PgSearch
   pg_search_scope :search_by_description,
     against: [ :description, :title ],
@@ -34,5 +36,11 @@ class Project < ApplicationRecord
   #   Tag.find_by_name!(name).projects
   # end
 
+
+  private
+
+  def send_newproject_email
+    ProjectMailer.newproject(self).deliver_now
+  end
 
 end
