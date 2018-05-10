@@ -30,6 +30,7 @@
 
 .btn-from-search {
   border-radius: 15px;
+  margin-top: 10px;
 }
 
 .project-description {
@@ -82,4 +83,19 @@ button {
   color: blue;
 }
 
+#div-favori {
+  position:relative
+}
+
+#add-favoris {
+  display: none;
+}
+
+#div-favori:hover #add-favoris {
+  display: block;
+  font-size: 8px;
+  position:absolute;
+  left: -10px;
+  font-weight: bold;
+}
 
