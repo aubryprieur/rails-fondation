@@ -7,8 +7,9 @@ class ProjectMailer < ApplicationMailer
   #
   def newproject(project)
     @project = project
+    users = User.all
       mail(
-        to:       User.last,
+        to:       emails = users.collect(&:email).join(", "),
         subject:  "Un nouvel appel à projet sur FondaBase !"
       )
   end

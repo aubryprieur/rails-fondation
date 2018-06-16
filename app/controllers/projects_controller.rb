@@ -34,8 +34,11 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(project_params)
+    users = User.all
     if @project.save
-      ProjectMailer.newproject(@project).deliver_now
+      users.each do |user|
+        ProjectMailer.newproject(@project).deliver_now
+      end
       redirect_to projects_path
     else
       render :new
