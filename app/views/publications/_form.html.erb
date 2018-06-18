@@ -1,0 +1,7 @@
+<div class="container">
+  <%= simple_form_for @publication do |f| %>
+    <%= f.association :category %>
+    <%= f.association :eligible %>
+    <%= f.button :submit %>
+  <% end %>
+</div>
