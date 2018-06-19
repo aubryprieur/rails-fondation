@@ -34,12 +34,8 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(project_params)
-    @publication = Publication.where(user === current_user)
-    users = User.where(@publication.current_user.category === @project.category)
     if @project.save
-      users.each do |user|
-        ProjectMailer.newproject(@project).deliver_now
-      end
+      ProjectMailer.newproject(@project).deliver_now
       redirect_to projects_path
     else
       render :new
