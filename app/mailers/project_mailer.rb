@@ -7,9 +7,8 @@ class ProjectMailer < ApplicationMailer
   #
   def newproject(project)
     @project = project
-    @user = user
       mail(
-        to:       user.joins(:publications).where(publications: {category_id: project.category_id}),
+        to:       mails = User.joins(:publications).where(publications: {category_id: project.category_id}).collect(&:email).join(","),
         subject:  "Un nouvel appel à projet sur FondaBase !"
       )
   end
