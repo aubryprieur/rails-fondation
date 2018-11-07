@@ -3,7 +3,7 @@ class PublicationsController < ApplicationController
   before_action :favorites
 
   def index
-    @publications = Publication.all
+    @publications = current_user.publications
     @eligibles = Eligible.all
     @categories = Category.all
   end
