@@ -7,8 +7,8 @@ class ProjectMailer < ApplicationMailer
   #
   def newproject(project)
     @project = project
-    project_eligibles = ProjectEligible.where("project_id =?", @project.id).pluck(:eligible_id)
-    mails = User.includes(:publications).where("publications.category_id = ? ", @project.category_id).pluck(:email)
+    project_eligibles = ProjectEligible.where("project_id =?", project.id).pluck(:eligible_id)
+    mails = User.includes(:publications).where("publications.category_id = ? ", project.category_id).pluck(:email)
       mail(
         to: mails,
         subject:  "Un nouvel appel à projet sur FondaBase !"
