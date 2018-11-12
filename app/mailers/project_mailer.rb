@@ -8,9 +8,10 @@ class ProjectMailer < ApplicationMailer
   def newproject(project)
     @project = project
     puts "##################################"
+    puts project.inspect
     puts project.project_eligibles.inspect
     puts "##################################"
-    proj_elig = ProjectEligible.where('project_id =?', @project.id).pluck(:eligible_id)
+    proj_elig = ProjectEligible.where('project_id =?', project.id).pluck(:eligible_id)
     puts "##################################"
     puts proj_elig.inspect
     puts "##################################"
