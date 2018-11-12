@@ -17,7 +17,7 @@ class ProjectsController < ApplicationController
     request = request.search_by_description(params[:query]) if params[:query].present?
     request = request.where(category: session[:search]['category']) if session[:search]['category'].present?
     request = request.joins(:project_eligibles).where(project_eligibles: {eligible_id: session[:search]['eligible']}) if session[:search]['eligible'].present?
-    # request = request.where('expiration > ?', Date.today)
+    request = request.where('expiration > ?', Date.today)
 
     @projects = request.page(params[:page]).order(params[:sort]).paginate(:page => params[:page], :per_page => 4)
   end
