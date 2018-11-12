@@ -34,6 +34,7 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(project_params)
+    @project.save
     if @project.save
       ProjectMailer.newproject(@project).deliver_now
       redirect_to projects_path
