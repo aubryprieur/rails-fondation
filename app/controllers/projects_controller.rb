@@ -35,6 +35,10 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
     @project.save
     if @project.save
+      project_eligibles = ProjectEligible.new
+      project_eligibles.project_id = @project.id
+      project_eligibles.eligible_ids = @project.eligible_ids
+      project_eligibles.save
       ProjectMailer.newproject(project).deliver_now
       redirect_to projects_path
     else
