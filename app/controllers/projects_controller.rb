@@ -31,12 +31,11 @@ class ProjectsController < ApplicationController
     @project = Project.new
   end
 
-
   def create
     @project = Project.new(project_params)
     @project.save
     if @project.save
-      ProjectMailer.newproject(@project).deliver_now
+      ProjectMailer.newproject(project).deliver_now
       redirect_to projects_path
     else
       render :new
