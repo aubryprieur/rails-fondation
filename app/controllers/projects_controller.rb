@@ -35,9 +35,8 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
     @project.save
     if @project.save
-      project_eligibles = ProjectEligible.new
+      project_eligibles = ProjectEligible.new(projelig_params)
       project_eligibles.project_id = @project.id
-      project_eligibles.eligible_ids = @project.eligible_ids
       project_eligibles.save
       ProjectMailer.newproject(project).deliver_now
       redirect_to projects_path
@@ -71,6 +70,10 @@ class ProjectsController < ApplicationController
 
   def project_params
     params.require(:project).permit(:title, :description, :link, :expiration, :all_tags, :category_id, :fondation_id, eligible_ids: [])
+  end
+
+  def projelig_params
+    params.require(:project_eligible).permit(:eligible_id, :project_id)
   end
 
   def search_params
