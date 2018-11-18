@@ -1,0 +1,16 @@
+<div class="container">
+  <h1>Ma veille</h1>
+  <p>Fondabase vous permet de faire une veille active sur les appels à projet en recherchant les opportunités qui vous intéressent. Vous pouvez paramétrer vos alertes et vous recevrez directement dans votre boite email, les appels à projets qui vous intéressent</p>
+  <p>Je vais recevoir directement par email les financements :</p>
+  <ul>
+    <% @publications.each do |publication| %>
+      <li>Catégorie : <%= publication.category.title %> /// Réservé à : <%= publication.eligible.title %></p></li>
+      <%= link_to publication_path(publication), method: :delete do %>
+        <i class="fas fa-minus" style="color: #DE6860"></i>
+      <% end %>
+    <% end %>
+  </ul>
+  <%= link_to new_publication_path(@publication) do %>
+    <i class="fas fa-plus" style="color: #DE6860"></i>Ajouter une alerte
+  <% end %>
+</div>

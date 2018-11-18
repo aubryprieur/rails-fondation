@@ -11,10 +11,19 @@
 
       <!-- Links when logged in -->
       <% if current_user.admin == true %>
-        <%= link_to admin_root_path, class: "navbar-wagon-item navbar-wagon-link" do %>
+        <%= link_to admin_root_path, class: "navbar-wagon-item navbar-wagon-link", target:"_blank" do %>
           <i class="fas fa-unlock-alt"></i> Admin
         <% end %>
       <% end %>
+
+        <%= link_to publications_path, class: "navbar-wagon-item navbar-wagon-link" do %>
+          <i class="far fa-bell"></i> Mes alertes
+        <% end %>
+
+      <%= link_to projects_path, class: "navbar-wagon-item navbar-wagon-link" do %>
+        <i class="fas fa-search"></i> Recherche
+      <% end %>
+
       <%= link_to favorites_path, class: "navbar-wagon-item navbar-wagon-link" do %>
         <i class="far fa-bookmark"></i> Mes favoris (<%= @favorite_projects.count %>)
       <% end %>

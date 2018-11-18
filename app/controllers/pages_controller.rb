@@ -10,7 +10,9 @@ class PagesController < ApplicationController
   private
 
   def favorites
-    @favorite_projects = current_user.favorite_projects
+    if current_user
+      @favorite_projects = current_user.favorite_projects
+    end
   end
 
 end
