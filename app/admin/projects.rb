@@ -27,7 +27,7 @@ index do
       column do |eligible|
         eligible.title
       end
-     end
+    end
   end
   actions
 end
@@ -38,8 +38,12 @@ show do
     row :description
     row :link
     row :expiration
-    row :category_id
-    row :fondation_id
+    row :category_id do |project|
+      project.category.title
+    end
+    row :fondation_id do |project|
+      project.fondation.title
+    end
     table_for project.eligibles.order('title ASC') do
       column "Eligibles" do |eligible|
         link_to eligible.title, [ :admin, eligible ]
