@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.3.4'
+ruby '2.4.0'
 
 gem 'devise'
 gem 'figaro'
@@ -22,6 +22,7 @@ gem 'kaminari'
 gem 'activeadmin', github: 'activeadmin/activeadmin'
 gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 gem 'pg_search'
+gem "sprockets", ">= 3.7.2"
 
 group :development, :test do
   gem 'pry-byebug'
